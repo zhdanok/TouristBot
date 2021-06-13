@@ -13,17 +13,18 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "city_en")
-public class CityEn implements Serializable {
+@Table(name = "city")
+public class City implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_en")
-    private Integer id;
+    @Column(name = "name_ru")
+    private String nameRu;
 
     @Column(name = "name_en")
     private String nameEn;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "info_id", referencedColumnName = "info_id")
+    @JoinColumn(name = "id")
     private CityInfo cityInfo;
+
 }
