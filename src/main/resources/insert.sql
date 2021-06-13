@@ -19,14 +19,15 @@ INSERT INTO city_en VALUES
 (7, 'Istanbul', 7),
 (8, 'Seoul', 8);
 
-INSERT INTO city_ru (id_ru, name_ru, info_id) VALUES (1, 'Москва', 1);
-INSERT INTO city_ru (id_ru, name_ru, info_id) VALUES (2, 'Нью-Йорк', 2);
-INSERT INTO city_ru (id_ru, name_ru, info_id) VALUES (3, 'Лондон', 3);
-INSERT INTO city_ru (id_ru, name_ru, info_id) VALUES (4, 'Париж', 4);
-INSERT INTO city_ru (id_ru, name_ru, info_id) VALUES (5, 'Бангкок', 5);
-INSERT INTO city_ru (id_ru, name_ru, info_id) VALUES (6, 'Дубаи', 6);
-INSERT INTO city_ru (id_ru, name_ru, info_id) VALUES (7, 'Стамбул', 7);
-INSERT INTO city_ru (id_ru, name_ru, info_id) VALUES (8, 'Сеул', 8);
+INSERT INTO city VALUES
+('Москва', 'Moscow', 1),
+('Нью-Йорк', 'New-York', 2),
+('Лондон', 'London', 3),
+('Париж', 'Paris', 4),
+('Бангкок', 'Bangkok', 5),
+('Дубаи', 'Dubai', 6),
+('Стамбул', 'Istanbul', 7),
+('Сеул', 'Seoul', 8);
 
 
 # создание БД
@@ -34,10 +35,7 @@ CREATE DATABASE guide
     DEFAULT CHARACTER SET utf8
     DEFAULT COLLATE utf8_general_ci;
 
-# запрос на английском
-SELECT name_en, info FROM city_en
-JOIN city_info ci on ci.info_id = city_en.info_id;
 
-# запрос на русском
-SELECT name_ru, info FROM city_ru
-JOIN city_info ci on ci.info_id = city_ru.info_id;
+SELECT info FROM city_info
+                     JOIN city c on city_info.info_id = c.info_id
+WHERE name_ru like '%Москва%' OR name_en like '%Moscow%';

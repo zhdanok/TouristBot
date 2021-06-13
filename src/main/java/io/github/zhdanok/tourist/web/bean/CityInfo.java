@@ -1,9 +1,6 @@
 package io.github.zhdanok.tourist.web.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,15 +14,16 @@ import java.io.Serializable;
 public class CityInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "info_id")
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "info")
     private String info;
 
-   @OneToOne(mappedBy = "cityInfo")
-    private CityRu cityRu;
-
     @OneToOne(mappedBy = "cityInfo")
-    private CityEn cityEn;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private City city;
+
+
 }

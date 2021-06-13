@@ -1,12 +1,14 @@
 package io.github.zhdanok.tourist.telegrambot;
 
-import io.github.zhdanok.tourist.telegrambot.command.CommandContainer;
-import io.github.zhdanok.tourist.telegrambot.service.SendBotMessageService;
+import io.github.zhdanok.tourist.telegrambot.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+
 
 @Component
 @PropertySource("application.properties")
@@ -16,25 +18,29 @@ public class TouristBot extends TelegramLongPollingBot {
     @Value("${bot.token}")
     private String botToken;
 
-    private final  CommandContainer commandContainer;
+    @Autowired
+    private MessageService messageService;
 
-    public TouristBot() {
-        this.commandContainer = new CommandContainer(new SendBotMessageService(this));
-    }
-
+    public static final String START_MESSAGE = "<b>Добро пожаловать!</b> \n" +
+            "Напиши мне какой город ты собираешься посетить. Можешь использовать русский либо английский язык";
 
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            String commandIdentifier = update.getMessage().getText();
-            commandContainer.retrieveCommand(commandIdentifier).execute(update);
+            switch (update.getMessage().getText()) {
+                case ("/start"):
+                    messageService.sendStartMessage(update.getMessage().getChatId().toString(), START_MESSAGE);
+                    break;
+                case ("/show_all"):
+                    messageService.sendAllCity(update);
+                    break;
+                default:
+                    messageService.sendInfoAboutCity(update);
 
-        } else if (update.hasCallbackQuery() && update.getCallbackQuery().getMessage().hasText()) {
-            String commandIdentifier = update.getCallbackQuery().getData().trim();
-            commandContainer.retrieveCommand(commandIdentifier).execute(update);
+            }
         }
-    }
 
+    }
 
 
     @Override
