@@ -8,20 +8,10 @@
     <title>Guide</title>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <form style="margin-top: 20px" th:action="@{searchName}" method="get">
-            <input type="text" name="name" placeholder="Город"/>&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-success" type="submit">Найти по названию (RU)</button>
-        </form>
-        <form style="margin:  20px" th:action="@{searchId}" method="get">
-            <input type="text" name="id" placeholder="City"/>&nbsp;&nbsp;&nbsp;
-            <button type="submit" class="btn btn-success">Найти по названию (EN)</button>
-        </form>
-    </div>
-</div>
+
 <br>
 <form method="get">
+    <p><h4> Таблица данных о городах для TouristBot</h4></p>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -33,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="company : ${listCompany}">
+        <tr th:each="city : ${listCity}">
             <td th:text="${city.nameRu}">Город (RU)</td>
             <td th:text="${city.nameEn}">Город (EN)</td>
             <td th:text="${city.cityInfo.getInfo()}">Информация</td>
@@ -44,8 +34,8 @@
     <br>
 </form>
 <br>
-<a href="/table">Назад</a>
+
 <br>
-<a href="/addCity">Добавить информацию о городе</a>
+<a href="/addCity">Добавить информацию в таблицу</a>
 </body>
 </html>

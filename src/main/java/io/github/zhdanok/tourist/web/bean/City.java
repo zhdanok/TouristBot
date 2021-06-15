@@ -16,7 +16,6 @@ import java.io.Serializable;
 @Table(name = "city")
 public class City implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "name_ru")
     private String nameRu;
 
@@ -26,5 +25,6 @@ public class City implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private CityInfo cityInfo;
+
 
 }
