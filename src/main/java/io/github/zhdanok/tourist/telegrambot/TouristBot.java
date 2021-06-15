@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static io.github.zhdanok.tourist.telegrambot.service.MessageService.START_MESSAGE;
 
 
 @Component
@@ -21,8 +22,7 @@ public class TouristBot extends TelegramLongPollingBot {
     @Autowired
     private MessageService messageService;
 
-    public static final String START_MESSAGE = "<b>Добро пожаловать!</b> \n" +
-            "Напиши мне какой город ты собираешься посетить. Можешь использовать русский либо английский язык";
+
 
     @Override
     public void onUpdateReceived(Update update) {

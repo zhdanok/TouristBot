@@ -19,9 +19,10 @@ public class MessageService {
     @Autowired
     CityRepository cityRepository;
 
-    /*public String getInfo(String name){
-        return cityRepository.getInfoByCity(name);
-    }*/
+    public static final String START_MESSAGE = "<b>Добро пожаловать!</b> \n" +
+            "Напиши мне какой город ты собираешься посетить. Можешь использовать русский либо английский язык";
+
+    public static final String NOT_FOUND = "К сожалению данный город отсутсвует в нашей базе";
 
     public void sendStartMessage(String chatId, String message) {
         SendMessage sendMessage = new SendMessage();
@@ -42,6 +43,9 @@ public class MessageService {
         sendMessage.setChatId(update.getMessage().getChatId().toString());
         sendMessage.enableHtml(true);
         String info = cityRepository.getInfoByCity(update.getMessage().getText());
+        if (info == null) {
+            info = NOT_FOUND;
+        }
         sendMessage.setText(info);
 
         try {

@@ -25,5 +25,7 @@ public class CityInfo implements Serializable {
     @EqualsAndHashCode.Exclude
     private City city;
 
-
+    public CityInfo(String info) {
+        this.info = info;
+    }
 }
