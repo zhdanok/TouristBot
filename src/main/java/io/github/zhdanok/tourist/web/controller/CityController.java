@@ -29,7 +29,6 @@ public class CityController {
     @GetMapping(value = "addCity")
     public ModelAndView addCityPage() {
         ModelAndView modelAndView = new ModelAndView("/addCity");
-        modelAndView.addObject("addCity");
         return modelAndView;
     }
 
@@ -38,12 +37,13 @@ public class CityController {
                                 @RequestParam(value = "nameEn", required = false) String nameEn,
                                 @RequestParam(value = "info", required = false) String info) {
         ModelAndView modelAndView = new ModelAndView("/addCity");
-        CityInfo cityInfo = new CityInfo(info);
-        cityInfoRepository.save(cityInfo);
+
+       /* CityInfo cityInfo = new CityInfo(info);
+        //cityInfoRepository.save(cityInfo);*/
         City city = City.builder()
                 .nameRu(nameRu)
                 .nameEn(nameEn)
-                .cityInfo(cityInfo)
+                .cityInfo(new CityInfo(info))
                 .build();
         cityRepository.save(city);
         modelAndView.setViewName("redirect:/table");
@@ -58,7 +58,6 @@ public class CityController {
         modelAndView.addObject("nameRu", nameRu);
         modelAndView.addObject("nameEn", cityRepository.getCityEnByCityRu(nameRu));
         modelAndView.addObject("info", cityRepository.getInfoByCity(nameRu));
-
         return modelAndView;
     }
 
@@ -81,13 +80,13 @@ public class CityController {
         modelAndView.addObject("nameRu", nameRu);
         modelAndView.addObject("nameEn", cityRepository.getCityEnByCityRu(nameRu));
         modelAndView.addObject("info", cityRepository.getInfoByCity(nameRu));
-
         return modelAndView;
     }
 
     @PostMapping(value = "delete" + "/{nameRu}")
     public ModelAndView deleteCityPage(@PathVariable(name = "nameRu") String nameRu) {
         ModelAndView modelAndView = new ModelAndView("/deleteCity");
+
         cityRepository.deleteCityByCityRu(nameRu);
         modelAndView.setViewName("redirect:/table");
         return modelAndView;

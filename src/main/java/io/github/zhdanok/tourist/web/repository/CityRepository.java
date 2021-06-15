@@ -21,10 +21,6 @@ public interface CityRepository extends JpaRepository<City, String> {
     @Query(value = "SELECT * FROM city WHERE name_ru = ?1", nativeQuery = true)
     List<City> findAllByNameRu(String nameRu);
 
-    @Query(value = "SELECT * FROM city WHERE name_en = ?1", nativeQuery = true)
-    List<City> findAllByNameEn(String nameEn);
-
-
     @Query(value = "SELECT info FROM city_info " +
             "JOIN city c on city_info.id = c.id " +
             "WHERE name_ru = ?1 OR name_en = ?1", nativeQuery = true)
