@@ -1,7 +1,8 @@
 # TouristBot for Resliv
 
-###Имя бота: Tourist_Bot_for_test_bot
-###Токен: 1869751325:AAFLjbqxNwSgWh1WyoqNw-v2G7bZ8JgwYU0
+### Имя бота: Tourist_Bot_for_test_bot
+
+### Токен: 1869751325:AAFLjbqxNwSgWh1WyoqNw-v2G7bZ8JgwYU0
 
 Имя, токен, логин и пароль для базы данных (mySQL) уже находятся в файле application.properties
 Ничего дополнительно вводить не нужно.
